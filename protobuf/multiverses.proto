@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+option go_package = "github.com/bnsouzas/tribuz/generated/grpc/protobuf";
+
+package tribuz;
+
+service MultiverseService {
+  rpc GetMultiverse (MultiverseGetRequest) returns (MultiverseResponse) {}
+  rpc GetMultiverseByCode (MultiverseGetByCodeRequest) returns (MultiverseResponse) {}
+  rpc ListMultiverses (MultiverseListRequest) returns (MultiversesPage) {}
+  rpc StreamMultiverses (MultiverseStreamRequest) returns (stream MultiverseResponse) {}
+  rpc CreateMultiverse (MultiverseCreateRequest) returns (MultiverseResponse) {}
+  rpc UpdateMultiverse (MultiverseUpdateRequest) returns (MultiverseResponse) {}
+  rpc RemoveMultiverse (MultiverseRemoveRequest) returns (google.protobuf.Empty) {}
+}
+message MultiverseGetRequest {
+  string id = 1;
+}
+message MultiverseGetByCodeRequest {
+  string code = 1;
+}
+message MultiverseCreateRequest {
+  string code = 1;
+  string name = 2;
+  string description = 3;
+}
+message MultiverseUpdateRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+message MultiverseRemoveRequest {
+  string id = 1;
+}
+message MultiverseListRequest {}
+message MultiverseStreamRequest {}
+message MultiversesPage {
+  repeated MultiverseResponse items = 1;
+}
+message MultiverseResponse {
+  string id = 1;
+  string code = 2;
+  string name = 3;
+  string description = 4;
+  google.protobuf.Timestamp created_at = 5;
+  string created_by = 6;
+  google.protobuf.Timestamp changed_at = 7;
+  string changed_by = 8;
+}

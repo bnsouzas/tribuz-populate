@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+option go_package = "github.com/bnsouzas/tribuz/generated/grpc/protobuf";
+
+package tribuz;
+
+service ProfileService {
+  rpc GetProfile (ProfileGetRequest) returns (ProfileResponse) {}
+  rpc GetProfileByUsername (ProfileGetByUsernameRequest) returns (ProfileResponse) {}
+  rpc ListProfiles (ProfileListRequest) returns (ProfilesPage) {}
+  rpc StreamProfiles (ProfileStreamRequest) returns (stream ProfileResponse) {}
+  rpc CreateProfile (ProfileCreateRequest) returns (ProfileResponse) {}
+  rpc UpdateProfile (ProfileUpdateRequest) returns (ProfileResponse) {}
+  rpc RemoveProfile (ProfileRemoveRequest) returns (google.protobuf.Empty) {}
+}
+message ProfileGetRequest {
+  string id = 1;
+}
+message ProfileGetByUsernameRequest {
+  string username = 1;
+}
+message ProfileCreateRequest {
+  string multiverse_id = 1;
+  string username = 2; 
+  string fullname = 3;
+  string nickname = 4;
+  string sex = 5;
+  google.protobuf.Timestamp birthdate = 6;
+}
+message ProfileUpdateRequest {
+  string id = 1;
+  string fullname = 2;
+  string nickname = 3;
+  string sex = 4;
+  google.protobuf.Timestamp birthdate = 5;
+}
+message ProfileRemoveRequest {
+  string id = 1;
+}
+message ProfileListRequest {}
+message ProfileStreamRequest {}
+message ProfilesPage {
+  repeated ProfileResponse items = 1;
+}
+message ProfileResponse {
+  string id = 1;
+  string multiverse_id = 2;
+  string username = 3; 
+  string fullname = 4;
+  string nickname = 5;
+  string sex = 6;
+  google.protobuf.Timestamp birthdate = 7;
+  google.protobuf.Timestamp created_at = 8;
+  string created_by = 9;
+  google.protobuf.Timestamp changed_at = 10;
+  string changed_by = 11;
+}

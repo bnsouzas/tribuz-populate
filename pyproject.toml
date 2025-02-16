@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "tribuz-populate"
+version = "0.1.0"
+description = ""
+authors = ["Bruno Neves <bnsouzas@gmail.com>"]
+readme = "README.md"
+packages = [{include = "tribuz_populate"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+faker = "^30.8.1"
+grpcio = "^1.70.0"
+protobuf = "^5.29.3"
+grpcio-tools = "^1.70.0"
+uvloop = "^0.21.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
